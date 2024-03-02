@@ -10,7 +10,7 @@ class RemoteDataSource {
     companion object{
         private const val BASE_URL="https://www.omdbapi.com/"
         private const val BASE_LOGIN_URL="https://expressbackend-production.up.railway.app/api/"
-
+//    private const val BASE_LOGIN_URL="http://localhost:7070/api/"
     }
     fun <Api>buildApi( api:Class<Api>): Api {
         return Retrofit.Builder()

@@ -28,7 +28,7 @@ class SignInActivity : BaseFragment<AuthViewModel,ActivityLoginBinding,AuthRepos
                 }
 
                 is Resource.Failure->{
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Information Error", Toast.LENGTH_LONG).show()
                 }
 
                 else -> {}
@@ -40,8 +40,19 @@ class SignInActivity : BaseFragment<AuthViewModel,ActivityLoginBinding,AuthRepos
             val email =binding.emailValue.text.toString().trim()
             val password=binding.editTextTextPassword.text.toString().trim()
 
+            if (email.isEmpty()||password.isEmpty()){
+                Toast.makeText(requireContext(),"Information was not fill in Properly",Toast.LENGTH_LONG).show()
+            }else{
+                if(email == "VVVBB" && password == "@bcd1234"){
+                    Toast.makeText(requireContext(),"Successful Login",Toast.LENGTH_LONG).show()
+
+                }else {
+                    Toast.makeText(requireContext(),"Wrong User",Toast.LENGTH_LONG).show()
+                }
+            }
             //@todo add input validation
-            viewModel.login(email, password)
+//            viewModel.login(email, password)
+
         }
     }
     override fun getViewModel()=AuthViewModel::class.java

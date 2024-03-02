@@ -13,6 +13,7 @@ abstract class BaseRepository {
             }catch (throwable:Throwable){
                 when(throwable){
                     is HttpException->{
+//                        Log.i("Errororor", throwable.localizedMessage)
                         Resource.Failure(true,throwable.code(),throwable.response()?.errorBody())
                     }
                     else->{
