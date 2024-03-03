@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.omdb.R
 import com.example.omdb.databinding.ActivityLoginBinding
 import com.example.omdb.network.AuthApi
 import com.example.omdb.network.Resource
@@ -44,6 +46,8 @@ class SignInActivity : BaseFragment<AuthViewModel,ActivityLoginBinding,AuthRepos
                 Toast.makeText(requireContext(),"Information was not fill in Properly",Toast.LENGTH_LONG).show()
             }else{
                 if(email == "VVVBB" && password == "@bcd1234"){
+                        findNavController().navigate(R.id.action_secondFragment_to_thirdFragment)
+
                     Toast.makeText(requireContext(),"Successful Login",Toast.LENGTH_LONG).show()
 
                 }else {

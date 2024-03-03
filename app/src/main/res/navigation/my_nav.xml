@@ -18,5 +18,14 @@
         android:id="@+id/secondFragment"
         android:name="com.example.omdb.ui.theme.Auth.SignInActivity"
         android:label="fragment_second"
-        tools:layout="@layout/activity_login" />
+        tools:layout="@layout/activity_login" >
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.example.omdb.MovieListFragment"
+        android:label="fragment_movie_list"
+        tools:layout="@layout/activity_movielise" />
 </navigation>
