@@ -17,8 +17,8 @@ import java.net.URL
 
 class RecyclerViewMovieAdapter(
     private val getActivity: RecyclerView,
-    private val movieList: TopRatedMoviesPage,
-    val chatListClickListener: ChatListClickListener) :
+    private val movieList: MoviesPageModel,
+    val chatListClickListener: ListClickListener) :
     RecyclerView.Adapter<RecyclerViewMovieAdapter.MyViewHolder>() {
 
 
@@ -41,7 +41,7 @@ class RecyclerViewMovieAdapter(
 //        holder.ivMovieImg.setImageBitmap(getBitmapFromURL(movieList.Search[position].Poster))
 //        holder.ivMovieImg.setImageBitmap((getBitmapFromURL("https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg")))
         holder.cardView.setOnClickListener {
-            chatListClickListener.onChatListItemClick(it,movieList.Search[position].imdbID)
+            chatListClickListener.onListItemClick(it,movieList.Search[position].imdbID)
 //            Toast.makeText(getActivity.context, movieList.Search[position].Title, Toast.LENGTH_LONG).show()
 //            findNavController().navigate(R.id.action_secondFragment_to_thirdFragment)
 

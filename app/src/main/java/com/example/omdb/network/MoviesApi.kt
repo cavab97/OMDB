@@ -2,7 +2,8 @@ package com.example.omdb.network
 
 
 import com.example.omdb.BuildConfig
-import com.example.omdb.ui.theme.movielist.TopRatedMoviesPage
+import com.example.omdb.ui.theme.movielist.MovieDetailsModel
+import com.example.omdb.ui.theme.movielist.MoviesPageModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -26,11 +27,14 @@ private val retrofit = Retrofit.Builder().addConverterFactory(MoshiConverterFact
 interface MoviesAuthApi {
 
     @GET("?apikey=6fc87060&s=Marvel&type=movie")
-     fun getAllData(): Call<TopRatedMoviesPage>
+     fun getAllData(): Call<MoviesPageModel>
+    @GET("?apikey=6fc87060&i=tt4154664")
+    fun getDetails(): Call<MovieDetailsModel>
+
+
 }
 
 object Api {
     val retrofitService: MoviesAuthApi by lazy{retrofit.create(MoviesAuthApi::class.java)}
-
 }
 

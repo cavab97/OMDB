@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,10 +9,7 @@
         android:id="@+id/imageDetailBackground"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:adjustViewBounds="true"
         android:alpha="0.7"
-        android:background="#FDFDFD"
-        android:scaleType="fitXY"
         android:src="@drawable/avatar" />
 
     <ImageView
@@ -28,8 +25,8 @@
 
         <ImageView
             android:id="@+id/MovieDetailImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="185dp"
+            android:layout_height="280dp"
             android:background="@drawable/outline_search"
             android:src="@drawable/avatar"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,10 +60,10 @@
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailTitle"
-            app:layout_constraintVertical_bias="0.025" />
+            app:layout_constraintVertical_bias="0.03" />
 
         <TextView
             android:id="@+id/MovieDetailSummary"
@@ -78,7 +75,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailSubTitle"
             app:layout_constraintVertical_bias="0.0" />
@@ -93,24 +90,24 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailSubTitle"
-            app:layout_constraintVertical_bias="0.373" />
+            app:layout_constraintVertical_bias="0.371" />
 
         <TextView
             android:id="@+id/MovieDetailSummarySub"
-            android:layout_width="403dp"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
             android:padding="5dp"
-            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
             android:text="Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two
 alien races."
+            android:textColor="@color/grey"
             android:textSize="16dp"
             android:textStyle="normal"
-            android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailSummary"
             app:layout_constraintVertical_bias="0.0" />
@@ -124,4 +121,4 @@ alien races."
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailRating"
             tools:orientation="horizontal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</RelativeLayout>

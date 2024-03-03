@@ -1,13 +1,21 @@
 package com.example.omdb.ui.theme.movielist
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-
-import com.example.omdb.R
+import com.example.omdb.databinding.ActivityMovieDetailsBinding
+import com.example.omdb.network.Api
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.InputStream
+import java.net.URL
 
 /**
  * A simple [Fragment] subclass.
@@ -15,17 +23,17 @@ import com.example.omdb.R
  * create an instance of this fragment.
  */
 class DetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: ActivityMovieDetailsBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
-        arguments?.let {
 
-        }
+        getAllDetails()
+
+
     }
 
     override fun onCreateView(
@@ -33,25 +41,51 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_movie_details, container, false)
+        binding = ActivityMovieDetailsBinding.inflate(inflater)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailsFragment().apply {
-                arguments = Bundle().apply {
 
+    fun getAllDetails(){
+
+        Api.retrofitService.getDetails().enqueue(object: Callback<MovieDetailsModel> {
+            override fun onResponse(
+                call: Call<MovieDetailsModel>,
+                response: Response<MovieDetailsModel>
+            ) {
+
+                if(response.isSuccessful){
+                    Log.i("DataDetails", response.body()!!.toString())
+                    onBindView(response.body()!!)
                 }
             }
+
+            override fun onFailure(call: Call<MovieDetailsModel>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
     }
+
+     fun onBindView( response: MovieDetailsModel) {
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+        val myUrl = URL(response.Poster)
+        val inputStream = myUrl.content as InputStream
+        val drawable = Drawable.createFromStream(inputStream, null)
+         binding.MovieDetailTitle.text = response.Title
+         binding.MovieDetailSubTitle.text = response.Genre
+         binding.imageDetailBackground.setImageDrawable(drawable)
+         binding.MovieDetailImage.setImageDrawable(drawable)
+         binding.MovieDetailSummarySub.text=response.Plot
+
+
+     }
+
+
 }
+
+
+
+

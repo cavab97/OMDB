@@ -1,4 +1,4 @@
-package com.example.omdb
+package com.example.omdb.ui.theme.movielist
 
 import android.os.Bundle
 import android.util.Log
@@ -11,34 +11,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.omdb.R
 import com.example.omdb.databinding.ActivityMovieliseBinding
 import com.example.omdb.network.Api
 import com.example.omdb.response.dataListResponse
-import com.example.omdb.ui.theme.movielist.ChatListClickListener
-import com.example.omdb.ui.theme.movielist.RecyclerViewMovieAdapter
-import com.example.omdb.ui.theme.movielist.TopRatedMoviesPage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  * Use the [MovieListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MovieListFragment : Fragment(), ChatListClickListener {
+class MovieListFragment : Fragment(), ListClickListener {
 
     private var recyclerView: RecyclerView? = null
     private var recyclerViewMovieAdapter: RecyclerViewMovieAdapter? = null
     private var movieList = mutableListOf<dataListResponse>()
-    private lateinit var binding:ActivityMovieliseBinding
+    private lateinit var binding: ActivityMovieliseBinding
     private lateinit var manager: RecyclerView.LayoutManager
     private lateinit var myAdapter: RecyclerView.Adapter<*>
 
@@ -105,34 +96,35 @@ class MovieListFragment : Fragment(), ChatListClickListener {
 //    }
     fun getAllData(){
 
-        Api.retrofitService.getAllData().enqueue(object: Callback<TopRatedMoviesPage>{
+        Api.retrofitService.getAllData().enqueue(object: Callback<MoviesPageModel> {
             override fun onResponse(
-                call: Call<TopRatedMoviesPage>,
-                response: Response<TopRatedMoviesPage>
+                call: Call<MoviesPageModel>,
+                response: Response<MoviesPageModel>
             ) {
 
                 if(response.isSuccessful){
-                    Log.i("Data",response.body()!!.toString())
+                    Log.i("Data", response.body()!!.toString())
                     recyclerView = binding.recyclerView.apply{
-                        myAdapter = RecyclerViewMovieAdapter(this,
-                            response.body()!!,this@MovieListFragment
+                        myAdapter = RecyclerViewMovieAdapter(
+                            this,
+                            response.body()!!, this@MovieListFragment
                         )
                         layoutManager = manager
-                        layoutManager=GridLayoutManager(context, 2)
+                        layoutManager= GridLayoutManager(context, 2)
                         adapter = myAdapter
                     }
 
                 }
             }
 
-            override fun onFailure(call: Call<TopRatedMoviesPage>, t: Throwable) {
+            override fun onFailure(call: Call<MoviesPageModel>, t: Throwable) {
                 t.printStackTrace()
             }
 
         })
     }
 
-    override fun onChatListItemClick(view: View, imdbID: String ) {
+    override fun onListItemClick(view: View, imdbID: String ) {
 
         Toast.makeText(requireContext(), imdbID + "Was Clock", Toast.LENGTH_SHORT).show()
 // here you navigate to your fragment....
