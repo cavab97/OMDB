@@ -1,19 +1,24 @@
 package com.example.omdb.ui.theme.movielist
 
+import android.graphics.drawable.Drawable
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.omdb.MovieListFragment
 import com.example.omdb.R
+import java.io.InputStream
+import java.net.URL
 
-class RecyclerViewMovieAdapter constructor(
-    private val getActivity: MovieListFragment,
-    private val movieList: List<Movie>) :
+
+class RecyclerViewMovieAdapter(
+    private val getActivity: RecyclerView,
+    private val movieList: TopRatedMoviesPage,
+    val chatListClickListener: ChatListClickListener) :
     RecyclerView.Adapter<RecyclerViewMovieAdapter.MyViewHolder>() {
 
 
@@ -24,16 +29,27 @@ class RecyclerViewMovieAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvMovieTitle.text = movieList[position].title
-        holder.ivMovieImg.setImageResource(movieList[position].image)
-
+        val policy = ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
+        val myUrl = URL(movieList.Search[position].Poster)
+        val inputStream = myUrl.content as InputStream
+        val drawable = Drawable.createFromStream(inputStream, null)
+        holder.tvMovieTitle.text = movieList.Search[position].Title
+        holder.ivMovieImg.setImageDrawable(drawable)
+//        holder.ivMovieImg.setImageURI("https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg".toUri())
+//        holder.ivMovieImg.setImageResource(movieList.Search[position].Poster.toInt())
+//        holder.ivMovieImg.setImageBitmap(getBitmapFromURL(movieList.Search[position].Poster))
+//        holder.ivMovieImg.setImageBitmap((getBitmapFromURL("https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_SX300.jpg")))
         holder.cardView.setOnClickListener {
-            Toast.makeText(getActivity.requireContext(), movieList[position].title, Toast.LENGTH_LONG).show()
+            chatListClickListener.onChatListItemClick(it,movieList.Search[position].imdbID)
+//            Toast.makeText(getActivity.context, movieList.Search[position].Title, Toast.LENGTH_LONG).show()
+//            findNavController().navigate(R.id.action_secondFragment_to_thirdFragment)
+
         }
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        return movieList.Search.size
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

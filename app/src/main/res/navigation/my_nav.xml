@@ -27,5 +27,15 @@
         android:id="@+id/thirdFragment"
         android:name="com.example.omdb.MovieListFragment"
         android:label="fragment_movie_list"
-        tools:layout="@layout/activity_movielise" />
+        tools:layout="@layout/activity_movielise" >
+        <action
+            android:id="@+id/action_thirdFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.omdb.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/layout_movie_details" />
+
 </navigation>
