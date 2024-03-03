@@ -34,8 +34,8 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.omdb.DetailsFragment"
-        android:label="fragment_details"
-        tools:layout="@layout/layout_movie_details" />
+        android:name="com.example.omdb.ui.theme.movielist.DetailsFragment"
+        android:label="activity_movie_details"
+        tools:layout="@layout/activity_movie_details" />
 
 </navigation>

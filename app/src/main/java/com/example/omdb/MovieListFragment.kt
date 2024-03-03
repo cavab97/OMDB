@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -135,6 +136,9 @@ class MovieListFragment : Fragment(), ChatListClickListener {
 
         Toast.makeText(requireContext(), imdbID + "Was Clock", Toast.LENGTH_SHORT).show()
 // here you navigate to your fragment....
+        findNavController().navigate(R.id.action_thirdFragment_to_detailsFragment)
+
+
     }
 
 
