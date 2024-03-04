@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -85,8 +86,10 @@ class MovieListFragment : Fragment(), ListClickListener {
     override fun onListItemClick(view: View, imdbID: String ) {
 
         Toast.makeText(requireContext(), imdbID + "Was Clock", Toast.LENGTH_SHORT).show()
+        val bundle = bundleOf("imdbID" to imdbID)
+
 // here you navigate to your fragment....
-        findNavController().navigate(R.id.action_thirdFragment_to_detailsFragment)
+        findNavController().navigate(R.id.action_thirdFragment_to_detailsFragment,bundle)
 
 
     }

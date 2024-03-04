@@ -12,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val BASE_URL="https://www.omdbapi.com/"
 private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -28,8 +29,8 @@ interface MoviesAuthApi {
 
     @GET("?apikey=6fc87060&s=Marvel&type=movie")
      fun getAllData(): Call<MoviesPageModel>
-    @GET("?apikey=6fc87060&i=tt4154664")
-    fun getDetails(): Call<MovieDetailsModel>
+    @GET("?")
+    fun getDetails(@Query("apikey") apikey: String,@Query("i") i:String): Call<MovieDetailsModel>
 
 
 }

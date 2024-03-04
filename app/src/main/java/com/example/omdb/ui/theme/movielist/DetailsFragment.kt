@@ -57,24 +57,26 @@ class DetailsFragment : Fragment() {
 
 
     fun getAllDetails(){
+       val imdbID= getArguments()?.getString("imdbID")
+        if (imdbID != null) {
+            Api.retrofitService.getDetails("6fc87060",imdbID).enqueue(object: Callback<MovieDetailsModel> {
+                override fun onResponse(
+                    call: Call<MovieDetailsModel>,
+                    response: Response<MovieDetailsModel>
+                ) {
 
-        Api.retrofitService.getDetails().enqueue(object: Callback<MovieDetailsModel> {
-            override fun onResponse(
-                call: Call<MovieDetailsModel>,
-                response: Response<MovieDetailsModel>
-            ) {
-
-                if(response.isSuccessful){
-                    Log.i("DataDetails", response.body()!!.toString())
-                    onBindView(response.body()!!)
+                    if(response.isSuccessful){
+                        Log.i("DataDetails", response.body()!!.toString())
+                        onBindView(response.body()!!)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<MovieDetailsModel>, t: Throwable) {
-                t.printStackTrace()
-            }
+                override fun onFailure(call: Call<MovieDetailsModel>, t: Throwable) {
+                    t.printStackTrace()
+                }
 
-        })
+            })
+        }
     }
 
      fun onBindView( response: MovieDetailsModel) {
