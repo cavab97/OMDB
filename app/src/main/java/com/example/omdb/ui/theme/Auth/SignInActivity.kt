@@ -58,6 +58,10 @@ class SignInActivity : BaseFragment<AuthViewModel,ActivityLoginBinding,AuthRepos
 //            viewModel.login(email, password)
 
         }
+
+        binding.signInBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
     override fun getViewModel()=AuthViewModel::class.java
 

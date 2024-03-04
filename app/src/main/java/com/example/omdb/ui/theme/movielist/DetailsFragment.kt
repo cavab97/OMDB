@@ -7,8 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.omdb.databinding.ActivityMovieDetailsBinding
 import com.example.omdb.network.Api
 import retrofit2.Call
@@ -26,13 +26,22 @@ class DetailsFragment : Fragment() {
     private lateinit var binding: ActivityMovieDetailsBinding
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+//
+//
+//
+//
+//    }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getAllDetails()
+        binding.MovieDetailCloseButton.setOnClickListener {
+            findNavController().popBackStack()
 
+        }
 
     }
 

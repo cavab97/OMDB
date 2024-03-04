@@ -17,8 +17,7 @@
 
         />
 
-    <SearchView
-
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="375dp"
         android:layout_height="46dp"

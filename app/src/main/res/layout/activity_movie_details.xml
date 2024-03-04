@@ -113,15 +113,6 @@ alien races."
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailSummary"
             app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="408dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MovieDetailRatingLabel"
-            tools:orientation="horizontal" />
-
         <RatingBar
             android:id="@+id/MovieratingBar"
             style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
@@ -169,5 +160,39 @@ alien races."
             app:layout_constraintStart_toEndOf="@+id/MovieDetailRating"
             app:layout_constraintTop_toBottomOf="@+id/MovieDetailImage"
             app:layout_constraintVertical_bias="0.0" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="378dp"
+            android:layout_height="152dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MovieDetailRatingLabel"
+            app:layout_constraintVertical_bias="0.542">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+        </HorizontalScrollView>
+
+        <Button
+            android:id="@+id/MovieDetailCloseButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="X"
+            android:textSize="20dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/blue"
+            android:background="@drawable/baseline_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.955"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.02" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
