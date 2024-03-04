@@ -1,12 +1,16 @@
 package com.example.omdb.ui.theme.movielist
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.omdb.databinding.ActivityMovieDetailsBinding
@@ -79,7 +83,8 @@ class DetailsFragment : Fragment() {
         }
     }
 
-     fun onBindView( response: MovieDetailsModel) {
+     @RequiresApi(Build.VERSION_CODES.S)
+     fun onBindView(response: MovieDetailsModel) {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         val myUrl = URL(response.Poster)
@@ -93,7 +98,7 @@ class DetailsFragment : Fragment() {
          binding.MovieratingBar.rating = (response.imdbRating).toFloat()/2;
          binding.MovieDetailRating.text=response.imdbRating+"/10"
          binding.MovieRatingBarRatingNumber.text=response.imdbVotes+" Ratings"
-
+         binding.imageDetailBackground.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.MIRROR))
 
      }
 
