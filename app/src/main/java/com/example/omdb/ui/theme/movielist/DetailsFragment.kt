@@ -79,6 +79,9 @@ class DetailsFragment : Fragment() {
          binding.imageDetailBackground.setImageDrawable(drawable)
          binding.MovieDetailImage.setImageDrawable(drawable)
          binding.MovieDetailSummarySub.text=response.Plot
+         binding.MovieratingBar.rating = (response.imdbRating).toFloat()/2;
+         binding.MovieDetailRating.text=response.imdbRating+"/10"
+         binding.MovieRatingBarRatingNumber.text=response.imdbVotes+" Ratings"
 
 
      }
