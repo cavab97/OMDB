@@ -108,16 +108,16 @@ class DetailsFragment : Fragment() {
          binding.MovieDetailRating.text=response.imdbRating+"/10"
          binding.MovieRatingBarRatingNumber.text=response.imdbVotes+" Ratings"
          binding.imageDetailBackground.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.MIRROR))
-
+            val parent=binding.horizontalScrollDataLayout
          for (i in 0 until response.Ratings.size) {
 
              val view: View =
-                 layoutInflater.inflate(com.example.omdb.R.layout.other_rating_button, null)
+                 layoutInflater.inflate(com.example.omdb.R.layout.other_rating_button,parent,false)
              val rating:TextView=view.findViewById(com.example.omdb.R.id.tvMovieDetailsratingCard)
              rating.text = response.Ratings[i].Value.toString()
              val ratingText:TextView=view.findViewById(com.example.omdb.R.id.tvMovieDetailsratingTitleCars)
              ratingText.text = response.Ratings[i].Source.toString()
-             binding.horizontalScrollDataLayout.apply {
+             parent.apply {
 
                  addView(view)
 
