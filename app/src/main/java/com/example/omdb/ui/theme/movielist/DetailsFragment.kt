@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,7 @@ import retrofit2.Response
 import java.io.InputStream
 import java.net.URL
 
+
 /**
  * A simple [Fragment] subclass.
  * Use the [DetailsFragment.newInstance] factory method to
@@ -28,7 +30,6 @@ import java.net.URL
  */
 class DetailsFragment : Fragment() {
     private lateinit var binding: ActivityMovieDetailsBinding
-
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -58,12 +59,20 @@ class DetailsFragment : Fragment() {
 
         return binding.root
     }
+    override fun onDestroyView() {
+        if (view != null) {
+            val parentViewGroup = requireView().parent as ViewGroup?
+            parentViewGroup?.removeAllViews();
+        }
+        super.onDestroyView()
+    }
 
 
     fun getAllDetails(){
        val imdbID= getArguments()?.getString("imdbID")
         if (imdbID != null) {
             Api.retrofitService.getDetails("6fc87060",imdbID).enqueue(object: Callback<MovieDetailsModel> {
+                @RequiresApi(Build.VERSION_CODES.S)
                 override fun onResponse(
                     call: Call<MovieDetailsModel>,
                     response: Response<MovieDetailsModel>
@@ -100,6 +109,20 @@ class DetailsFragment : Fragment() {
          binding.MovieRatingBarRatingNumber.text=response.imdbVotes+" Ratings"
          binding.imageDetailBackground.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.MIRROR))
 
+         for (i in 0 until response.Ratings.size) {
+
+             val view: View =
+                 layoutInflater.inflate(com.example.omdb.R.layout.other_rating_button, null)
+             val rating:TextView=view.findViewById(com.example.omdb.R.id.tvMovieDetailsratingCard)
+             rating.text = response.Ratings[i].Value.toString()
+             val ratingText:TextView=view.findViewById(com.example.omdb.R.id.tvMovieDetailsratingTitleCars)
+             ratingText.text = response.Ratings[i].Source.toString()
+             binding.horizontalScrollDataLayout.apply {
+
+                 addView(view)
+
+             }
+         }
      }
 
 
